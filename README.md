@@ -87,6 +87,7 @@ NODE_ENV=production       # Environment mode
 ```
 
 ### Device Support
+- **DELI** devices
 - **ZKTeco** devices
 - **Hikvision** biometric readers
 - **Generic HTTP-based** biometric devices
