@@ -1,0 +1,17 @@
+nohup: ignoring input
+2025-09-06T08:20:37.945Z - 🚀 Starting Multi-Device Biometric Server...
+2025-09-06T08:20:37.948Z - 📱 Support for multiple devices across different networks
+2025-09-06T08:20:37.948Z - 🌐 Branch-based device management enabled
+📁 Loaded 4 device configuration(s)
+🔌 Connected to device: branch-main (127.0.0.1)
+🔌 Connected to device: branch-warehouse (127.0.0.1)
+🔌 Connected to device: branch-security (127.0.0.1)
+🔌 Connected to device: reception-desk (127.0.0.1)
+🔌 DeviceManager initialized with 4 device(s)
+2025-09-06T08:20:38.100Z - 🚀 Multi-Device Biometric Server running on http://localhost:3000
+2025-09-06T08:20:38.101Z - ✅ Server initialization complete
+2025-09-06T08:20:38.101Z - 📊 Device Status:
+2025-09-06T08:20:38.101Z -   - branch-main: 🟢 Connected (127.0.0.1:4001)
+2025-09-06T08:20:38.101Z -   - branch-warehouse: 🟢 Connected (127.0.0.1:4002)
+2025-09-06T08:20:38.101Z -   - branch-security: 🟢 Connected (127.0.0.1:4003)
+2025-09-06T08:20:38.101Z -   - reception-desk: 🟢 Connected (127.0.0.1:4004)

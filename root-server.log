@@ -1,0 +1,14 @@
+nohup: ignoring input
+🚀 Multi-Device Biometric Server running on http://localhost:3001
+📱 Support for multiple devices across different networks
+🌐 Branch-based device management enabled
+Loaded 1 API keys from storage
+Loaded 1 API keys from storage
+🔑 Loaded 1 API keys (1 active)
+📁 Loaded 4 device configuration(s)
+🔌 Connected to device: branch-main (127.0.0.1)
+🔌 Connected to device: branch-warehouse (127.0.0.1)
+🔌 Connected to device: branch-security (127.0.0.1)
+🔌 Connected to device: reception-desk (127.0.0.1)
+🔌 DeviceManager initialized with 4 device(s)
+✅ Server initialization complete

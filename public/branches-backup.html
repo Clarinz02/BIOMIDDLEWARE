@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branch Management - Biometric System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+        }
+
+        .actions {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background: #45a049;
+        }
+
+        .btn.secondary {
+            background: #2196F3;
+        }
+
+        .btn.secondary:hover {
+            background: #0b7dda;
+        }
+
+        .btn.danger {
+            background: #f44336;
+        }
+
+        .btn.danger:hover {
+            background: #da190b;
+        }
+
+        .branches-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .branch-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .branch-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .branch-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .branch-title {
+            flex: 1;
+        }
+
+        .branch-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .branch-code {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .branch-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .branch-actions .btn {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+
+        .branch-info {
+            margin-bottom: 15px;
+        }
+
+        .branch-info p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .branch-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 6px;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .status-inactive {
+            background: #ffeaa7;
+            color: #d68910;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4CAF50;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .alert {
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .alert.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .nav-links {
+            margin-bottom: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="/">← Back to Dashboard</a>
+            <a href="/devices.html">Devices</a>
+            <a href="/employees.html">Employees</a>
+        </div>
+
+        <div class="header">
+            <h1>🏢 Branch Management</h1>
+            <p>Manage company branches and locations</p>
+        </div>
+
+        <div class="actions">
+            <button class="btn" onclick="showCreateModal()">+ Add New Branch</button>
+            <button class="btn secondary" onclick="refreshBranches()">🔄 Refresh</button>
+        </div>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading branches...</p>
+        </div>
+
+        <div id="branches-container" class="branches-grid" style="display: none;"></div>
+    </div>
+
+    <!-- Create/Edit Branch Modal -->
+    <div id="branchModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Branch</h2>
+            </div>
+            <div id="modalAlert"></div>
+            <form id="branchForm">
+                <div class="form-group">
+                    <label for="branchName">Branch Name *</label>
+                    <input type="text" id="branchName" required>
+                </div>
+                <div class="form-group">
+                    <label for="branchCode">Branch Code *</label>
+                    <input type="text" id="branchCode" required placeholder="e.g., MAIN, WH, SEC" style="text-transform: uppercase;">
+                </div>
+                <div class="form-group">
+                    <label for="branchDescription">Description</label>
+                    <textarea id="branchDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="branchAddress">Address</label>
+                    <textarea id="branchAddress" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="branchPhone">Phone</label>
+                    <input type="tel" id="branchPhone">
+                </div>
+                <div class="form-group">
+                    <label for="branchManager">Manager Name</label>
+                    <input type="text" id="branchManager">
+                </div>
+                <div class="form-group">
+                    <label for="branchManagerEmail">Manager Email</label>
+                    <input type="email" id="branchManagerEmail">
+                </div>
+                <div class="form-group">
+                    <label for="branchStatus">Status</label>
+                    <select id="branchStatus">
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <div style="margin-top: 20px;">
+                    <button type="submit" class="btn">Save Branch</button>
+                    <button type="button" class="btn" style="background: #666; margin-left: 10px;" onclick="closeModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let branches = [];
+        let editingBranchId = null;
+
+        // Load branches on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, starting branch loading...');
+            loadBranches();
+        });
+
+        async function loadBranches() {
+            console.log('loadBranches function called');
+            try {
+                document.getElementById('loading').style.display = 'block';
+                document.getElementById('branches-container').style.display = 'none';
+                console.log('Loading display updated');
+
+                console.log('Fetching branches from API...');
+                const response = await fetch('/api/branches?includeStats=true');
+                console.log('API response received:', response.status);
+                const data = await response.json();
+                console.log('API data:', data);
+
+                if (data.success) {
+                    branches = data.data;
+                    displayBranches();
+                } else {
+                    throw new Error(data.error || 'Failed to load branches');
+                }
+            } catch (error) {
+                console.error('Error loading branches:', error);
+                showAlert('Error loading branches: ' + error.message, 'error');
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        function displayBranches() {
+            const container = document.getElementById('branches-container');
+            container.style.display = 'grid';
+
+            if (branches.length === 0) {
+                container.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #666;">No branches found. Add your first branch to get started!</div>';
+                return;
+            }
+
+            container.innerHTML = branches.map(branch => `
+                <div class="branch-card">
+                    <div class="branch-header">
+                        <div class="branch-title">
+                            <div class="branch-name">${branch.name}</div>
+                            <span class="branch-code">${branch.code}</span>
+                        </div>
+                        <div class="branch-actions">
+                            <button class="btn secondary" onclick="editBranch('${branch.id}')">Edit</button>
+                            ${branch.id !== 'main' ? `<button class="btn danger" onclick="deleteBranch('${branch.id}')">Delete</button>` : ''}
+                        </div>
+                    </div>
+                    
+                    <div class="branch-info">
+                        ${branch.description ? `<p><strong>Description:</strong> ${branch.description}</p>` : ''}
+                        ${branch.address ? `<p><strong>Address:</strong> ${branch.address}</p>` : ''}
+                        ${branch.manager_name ? `<p><strong>Manager:</strong> ${branch.manager_name}</p>` : ''}
+                        <p><strong>Status:</strong> <span class="status-badge status-${branch.status}">${branch.status}</span></p>
+                    </div>
+
+                    <div class="branch-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">${branch.employeeCount || 0}</div>
+                            <div class="stat-label">Total Employees</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">${branch.activeEmployees || 0}</div>
+                            <div class="stat-label">Active</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showCreateModal() {
+            editingBranchId = null;
+            document.getElementById('modalTitle').textContent = 'Add New Branch';
+            document.getElementById('branchForm').reset();
+            document.getElementById('modalAlert').innerHTML = '';
+            document.getElementById('branchModal').style.display = 'block';
+        }
+
+        async function editBranch(id) {
+            try {
+                const response = await fetch(`/api/branches/${id}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    const branch = data.data;
+                    editingBranchId = id;
+                    document.getElementById('modalTitle').textContent = 'Edit Branch';
+                    document.getElementById('branchName').value = branch.name || '';
+                    document.getElementById('branchCode').value = branch.code || '';
+                    document.getElementById('branchDescription').value = branch.description || '';
+                    document.getElementById('branchAddress').value = branch.address || '';
+                    document.getElementById('branchPhone').value = branch.phone || '';
+                    document.getElementById('branchManager').value = branch.manager_name || '';
+                    document.getElementById('branchManagerEmail').value = branch.manager_email || '';
+                    document.getElementById('branchStatus').value = branch.status || 'active';
+                    document.getElementById('modalAlert').innerHTML = '';
+                    document.getElementById('branchModal').style.display = 'block';
+                } else {
+                    showAlert('Error loading branch details: ' + (data.error || 'Unknown error'), 'error');
+                }
+            } catch (error) {
+                showAlert('Error loading branch details: ' + error.message, 'error');
+            }
+        }
+
+        async function deleteBranch(id) {
+            if (!confirm('Are you sure you want to delete this branch? This action cannot be undone.')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/branches/${id}`, {
+                    method: 'DELETE'
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    showAlert('Branch deleted successfully!', 'success');
+                    loadBranches();
+                } else {
+                    throw new Error(data.error || 'Failed to delete branch');
+                }
+            } catch (error) {
+                showAlert('Error deleting branch: ' + error.message, 'error');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('branchModal').style.display = 'none';
+            editingBranchId = null;
+        }
+
+        // Handle form submission
+        document.getElementById('branchForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('branchName').value.trim(),
+                code: document.getElementById('branchCode').value.trim().toUpperCase(),
+                description: document.getElementById('branchDescription').value.trim(),
+                address: document.getElementById('branchAddress').value.trim(),
+                phone: document.getElementById('branchPhone').value.trim(),
+                managerName: document.getElementById('branchManager').value.trim(),
+                managerEmail: document.getElementById('branchManagerEmail').value.trim(),
+                status: document.getElementById('branchStatus').value
+            };
+
+            try {
+                const url = editingBranchId ? `/api/branches/${editingBranchId}` : '/api/branches';
+                const method = editingBranchId ? 'PUT' : 'POST';
+
+                const response = await fetch(url, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showAlert(`Branch ${editingBranchId ? 'updated' : 'created'} successfully!`, 'success');
+                    closeModal();
+                    loadBranches();
+                } else {
+                    const errorMsg = data.details ? data.details.join(', ') : (data.error || 'Unknown error');
+                    throw new Error(errorMsg);
+                }
+            } catch (error) {
+                document.getElementById('modalAlert').innerHTML = `
+                    <div class="alert error">${error.message}</div>
+                `;
+            }
+        });
+
+        function refreshBranches() {
+            loadBranches();
+        }
+
+        function showAlert(message, type = 'info') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert ${type}`;
+            alertDiv.textContent = message;
+            
+            document.body.insertBefore(alertDiv, document.body.firstChild);
+            
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+
+        // Auto-generate branch code from name
+        document.getElementById('branchName').addEventListener('input', function() {
+            if (!editingBranchId) { // Only auto-generate for new branches
+                const name = this.value.trim();
+                const code = name.replace(/[^a-zA-Z0-9]/g, '').substring(0, 8).toUpperCase();
+                document.getElementById('branchCode').value = code;
+            }
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('branchModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Handle escape key to close modal
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

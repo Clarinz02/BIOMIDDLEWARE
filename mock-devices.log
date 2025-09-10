@@ -1,0 +1,140 @@
+nohup: ignoring input
+🚀 Starting Mock Biometric Devices...
+=========================================
+📱 Starting branch-main device on port 4001...
+🏢 Starting branch-warehouse device on port 4002...
+🔒 Starting branch-security device on port 4003...
+🏨 Starting reception-desk device on port 4004...
+🔧 Mock Biometric Device: reception-desk
+🔑 API Key: reception123
+🌐 Starting on port 4004...
+🔧 Mock Biometric Device: branch-main
+🔑 API Key: main123
+🌐 Starting on port 4001...
+🔧 Mock Biometric Device: branch-security
+🔑 API Key: security789
+🌐 Starting on port 4003...
+🚀 Mock biometric device 'reception-desk' running on http://127.0.0.1:4004
+🚀 Mock biometric device 'branch-main' running on http://127.0.0.1:4001
+📋 Available endpoints:
+📋 Available endpoints:
+   GET  /health - Health check
+   GET  /status - Device status (requires API key)
+   GET  /health - Health check
+   POST /scan - Trigger fingerprint scan (requires API key)
+   GET  /status - Device status (requires API key)
+   POST /scan - Trigger fingerprint scan (requires API key)
+   POST /enroll - Enroll new user (requires API key)
+   POST /enroll - Enroll new user (requires API key)
+🚀 Mock biometric device 'branch-security' running on http://127.0.0.1:4003
+📋 Available endpoints:
+   GET  /health - Health check
+   GET  /status - Device status (requires API key)
+   POST /scan - Trigger fingerprint scan (requires API key)
+   POST /enroll - Enroll new user (requires API key)
+🔧 Mock Biometric Device: branch-warehouse
+🔑 API Key: warehouse456
+🌐 Starting on port 4002...
+🚀 Mock biometric device 'branch-warehouse' running on http://127.0.0.1:4002
+📋 Available endpoints:
+   GET  /health - Health check
+   GET  /status - Device status (requires API key)
+   POST /scan - Trigger fingerprint scan (requires API key)
+   POST /enroll - Enroll new user (requires API key)
+
+✅ All mock devices started!
+=========================================
+📋 Device Status:
+   branch-main:      http://127.0.0.1:4001 (PID: 9311)
+   branch-warehouse: http://127.0.0.1:4002 (PID: 9315)
+   branch-security:  http://127.0.0.1:4003 (PID: 9316)
+   reception-desk:   http://127.0.0.1:4004 (PID: 9317)
+
+🧪 Test endpoints:
+   curl http://127.0.0.1:4001/health
+   curl -H 'x-api-key: main123' http://127.0.0.1:4001/status
+
+🛑 To stop all devices: pkill -f mock-device.js
+⌨️  Press Ctrl+C to stop all devices
+🔧 Biometric command: GetVersionInfo (test123)
+🔧 Biometric command: GetVersionInfo (0db245b8)
+🔧 Biometric command: GetVersionInfo (6d689010)
+🔧 Biometric command: GetVersionInfo (432fd317)
+🔧 Biometric command: GetVersionInfo (67aee385)
+🔧 Biometric command: GetVersionInfo (4037dc92)
+🔧 Biometric command: GetVersionInfo (035e0be6)
+🔧 Biometric command: GetVersionInfo (26c80ca8)
+🔧 Biometric command: GetVersionInfo (ac2d3f55)
+🔧 Biometric command: GetVersionInfo (3a541788)
+🔧 Biometric command: GetVersionInfo (5dce6c50)
+🔧 Biometric command: GetVersionInfo (26c84957)
+🔧 Biometric command: GetVersionInfo (571dfa4a)
+🔧 Biometric command: GetVersionInfo (0333b0cf)
+🔧 Biometric command: GetVersionInfo (a0a8de66)
+🔧 Biometric command: GetVersionInfo (be720730)
+🔧 Biometric command: GetVersionInfo (fedecf82)
+🔧 Biometric command: GetVersionInfo (aaca30d7)
+🔧 Biometric command: GetVersionInfo (b8d98fa8)
+🔧 Biometric command: GetVersionInfo (fabb3a05)
+🔧 Biometric command: GetVersionInfo (1aff7df3)
+🔧 Biometric command: GetVersionInfo (47370076)
+🔧 Biometric command: GetVersionInfo (05961dd5)
+🔧 Biometric command: GetVersionInfo (06fa8e04)
+🔧 Biometric command: GetVersionInfo (f3fd36e7)
+🔧 Biometric command: GetVersionInfo (f10ffe6e)
+🔧 Biometric command: GetVersionInfo (4bae4d5e)
+🔧 Biometric command: GetVersionInfo (d74d52f7)
+🔧 Biometric command: GetVersionInfo (bd585a99)
+🔧 Biometric command: GetVersionInfo (fc0e5234)
+🔧 Biometric command: GetVersionInfo (0559ea46)
+🔧 Biometric command: GetVersionInfo (f63ec893)
+🔧 Biometric command: GetVersionInfo (5f8995e8)
+🔧 Biometric command: GetVersionInfo (76ae96fb)
+🔧 Biometric command: GetVersionInfo (faddd0b2)
+🔧 Biometric command: GetVersionInfo (6b0dd84c)
+🔧 Biometric command: GetVersionInfo (7e714ba2)
+🔧 Biometric command: GetVersionInfo (c48c9c5d)
+🔧 Biometric command: GetVersionInfo (22dadbcc)
+🔧 Biometric command: GetVersionInfo (96a14699)
+🔧 Biometric command: GetVersionInfo (8e098178)
+🔧 Biometric command: GetVersionInfo (db2a49b8)
+🔧 Biometric command: GetVersionInfo (09d1f3be)
+🔧 Biometric command: GetVersionInfo (366751f1)
+🔧 Biometric command: GetVersionInfo (881814f4)
+🔧 Biometric command: GetVersionInfo (a07ea26e)
+🔧 Biometric command: GetVersionInfo (116ab4b8)
+🔧 Biometric command: GetVersionInfo (782fda29)
+🔧 Biometric command: GetVersionInfo (17eb24e3)
+🔧 Biometric command: GetVersionInfo (60add4a5)
+🔧 Biometric command: GetVersionInfo (119af793)
+🔧 Biometric command: GetVersionInfo (a717740f)
+🔧 Biometric command: GetVersionInfo (7d041910)
+🔧 Biometric command: GetVersionInfo (67defb4d)
+🔧 Biometric command: GetVersionInfo (93da3361)
+🔧 Biometric command: GetVersionInfo (d1d6340c)
+🔧 Biometric command: GetVersionInfo (f43b8d9c)
+🔧 Biometric command: GetVersionInfo (07517bad)
+🔧 Biometric command: GetVersionInfo (29908fbc)
+🔧 Biometric command: GetVersionInfo (614358ae)
+🔧 Biometric command: GetVersionInfo (22524020)
+🔧 Biometric command: GetVersionInfo (50c3e15d)
+🔧 Biometric command: GetVersionInfo (0276e20a)
+🔧 Biometric command: GetVersionInfo (50c80563)
+🔧 Biometric command: GetVersionInfo (11b19240)
+🔧 Biometric command: GetVersionInfo (694e3243)
+🔧 Biometric command: GetVersionInfo (5d73f01a)
+🔧 Biometric command: GetVersionInfo (672feae1)
+🔧 Biometric command: GetVersionInfo (aba9cdd8)
+🔧 Biometric command: GetVersionInfo (b04a242d)
+🔧 Biometric command: GetVersionInfo (0e008277)
+🔧 Biometric command: GetVersionInfo (ed90ae3f)
+🔧 Biometric command: GetVersionInfo (cf362509)
+🔧 Biometric command: GetVersionInfo (60ce0169)
+
+🛑 Shutting down mock device 'branch-warehouse'...
+
+🛑 Shutting down mock device 'branch-security'...
+
+🛑 Shutting down mock device 'reception-desk'...
+
+🛑 Shutting down mock device 'branch-main'...

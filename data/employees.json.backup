@@ -1,0 +1,52 @@
+[
+  {
+    "id": "EMP001",
+    "userId": "EMP001",
+    "name": "John Doe",
+    "position": "Software Engineer",
+    "department": "IT",
+    "branch": "main",
+    "hireDate": "2025-01-01",
+    "status": "active",
+    "email": "john.doe@company.com",
+    "phone": "+63 917 123 4567",
+    "address": "",
+    "emergencyContact": "",
+    "salary": 50000,
+    "createdAt": "2025-09-10T03:09:33.823Z",
+    "updatedAt": "2025-09-10T03:09:33.824Z",
+    "privilege": "user",
+    "card": "",
+    "password": "",
+    "biometricData": {
+      "fingerprints": [],
+      "faces": [],
+      "palms": []
+    }
+  },
+  {
+    "id": "EMP002",
+    "userId": "EMP002",
+    "name": "Maria Santos",
+    "position": "HR Manager",
+    "department": "Human Resources",
+    "branch": "warehouse",
+    "hireDate": "2024-06-15",
+    "status": "active",
+    "email": "maria.santos@company.com",
+    "phone": "+63 917 987 6543",
+    "address": "",
+    "emergencyContact": "",
+    "salary": 65000,
+    "createdAt": "2025-09-10T03:09:48.083Z",
+    "updatedAt": "2025-09-10T03:09:48.083Z",
+    "privilege": "user",
+    "card": "",
+    "password": "",
+    "biometricData": {
+      "fingerprints": [],
+      "faces": [],
+      "palms": []
+    }
+  }
+]

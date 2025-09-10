@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biometric Device Management System</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1><img src="logo.svg" alt="Logo" style="width: 40px; height: 40px; vertical-align: middle; margin-right: 10px;"> Biometric Device Manager</h1>
+            <div class="device-status">
+                <span class="status-indicator" id="deviceStatus">Disconnected</span>
+                <span class="device-ip" id="deviceIp">No device configured</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <ul class="nav-list">
+            <li><a href="#dashboard" class="nav-link active" data-section="dashboard">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a></li>
+            <li><a href="#device-manager" class="nav-link" data-section="device-manager">
+                <i class="fas fa-server"></i> Device Manager
+            </a></li>
+            <li><a href="#device" class="nav-link" data-section="device">
+                <i class="fas fa-cog"></i> Device Settings
+            </a></li>
+            <li><a href="#users" class="nav-link" data-section="users">
+                <i class="fas fa-users"></i> User Management
+            </a></li>
+            <li><a href="#enrollment" class="nav-link" data-section="enrollment">
+                <i class="fas fa-user-plus"></i> Biometric Enrollment
+            </a></li>
+            <li><a href="#attendance" class="nav-link" data-section="attendance">
+                <i class="fas fa-clock"></i> Attendance Records
+            </a></li>
+            <li><a href="#network" class="nav-link" data-section="network">
+                <i class="fas fa-network-wired"></i> Network Config
+            </a></li>
+            <li><a href="#api-keys" class="nav-link" data-section="api-keys">
+                <i class="fas fa-key"></i> API Keys
+            </a></li>
+            <li><a href="#hr-management" class="nav-link" data-section="hr-management">
+                <i class="fas fa-users-cog"></i> HR Management
+            </a></li>
+            <li><a href="#branch-management" class="nav-link" data-section="branch-management">
+                <i class="fas fa-building"></i> Branch Management
+            </a></li>
+            <li><a href="#attendance-tracking" class="nav-link" data-section="attendance-tracking">
+                <i class="fas fa-clock"></i> Attendance Tracking
+            </a></li>
+            <li><a href="#payroll-system" class="nav-link" data-section="payroll-system">
+                <i class="fas fa-money-bill-wave"></i> Payroll System
+            </a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Device Connection Modal -->
+        <div id="connectionModal" class="modal">
+            <div class="modal-content">
+                <h2><i class="fas fa-plug"></i> Connect to Device</h2>
+                <form id="connectionForm">
+                    <div class="form-group">
+                        <label for="deviceIpInput">Device IP Address:</label>
+                        <input type="text" id="deviceIpInput" placeholder="192.168.1.100" value="192.168.1.100">
+                    </div>
+                    <div class="form-group">
+                        <label for="apiKeyInput">API Key (optional):</label>
+                        <input type="text" id="apiKeyInput" placeholder="Enter API key">
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="useHttpsInput">
+                        <label for="useHttpsInput">Use HTTPS</label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-link"></i> Connect
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="section-header">
+                <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+                <button id="refreshDashboard" class="btn btn-secondary">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Device Info Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-info-circle"></i> Device Information</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="info-item">
+                            <span class="label">Firmware Version:</span>
+                            <span class="value" id="firmwareVersion">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Device UID:</span>
+                            <span class="value" id="deviceUid">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Device Time:</span>
+                            <span class="value" id="deviceTime">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Capabilities Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-list-check"></i> Device Capabilities</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="capabilities-grid" id="deviceCapabilities">
+                            Loading capabilities...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usage Statistics Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-pie"></i> Usage Statistics</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="usage-stats" id="usageStats">
+                            Loading usage data...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="quick-actions">
+                            <button class="btn btn-warning" id="lockDevice">
+                                <i class="fas fa-lock"></i> Lock Device
+                            </button>
+                            <button class="btn btn-success" id="unlockDevice">
+                                <i class="fas fa-unlock"></i> Unlock Device
+                            </button>
+                            <button class="btn btn-info" id="syncTime">
+                                <i class="fas fa-clock"></i> Sync Time
+                            </button>
+                            <button class="btn btn-primary" id="refreshData">
+                                <i class="fas fa-sync-alt"></i> Refresh All
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enhanced Device Manager Section -->
+        <section id="device-manager" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-server"></i> Device Manager</h2>
+                <div class="section-actions">
+                    <button id="refreshAllDevices" class="btn btn-secondary">
+                        <i class="fas fa-sync"></i> Refresh All
+                    </button>
+                    <button id="addDeviceBtn" class="btn btn-success">
+                        <i class="fas fa-plus"></i> Add Device
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Add Device Section -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-plus-circle"></i> Quick Add Device</h3>
+                    <button id="toggleAdvanced" class="btn btn-link">
+                        <i class="fas fa-cog"></i> Advanced Options
+                    </button>
+                </div>
+                <div class="card-content">
+                    <div class="quick-add-form">
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="deviceIP">IP Address:</label>
+                                <input type="text" id="deviceIP" placeholder="192.168.1.100" class="form-control">
+                            </div>
+                            <div class="input-group small">
+                                <label for="devicePort">Port:</label>
+                                <input type="number" id="devicePort" placeholder="80" class="form-control" value="80">
+                            </div>
+                            <button onclick="quickAddDevice()" class="btn btn-success">
+                                <i class="fas fa-plus"></i> Add Device
+                            </button>
+                        </div>
+                        
+                        <div id="advancedOptions" class="advanced-options" style="display:none;">
+                            <div class="input-row">
+                                <div class="input-group">
+                                    <label for="deviceApiKey">API Key:</label>
+                                    <input type="text" id="deviceApiKey" placeholder="Optional" class="form-control">
+                                </div>
+                                <div class="input-group">
+                                    <label for="deviceName">Device Name:</label>
+                                    <input type="text" id="deviceName" placeholder="Auto-generated" class="form-control">
+                                </div>
+                            </div>
+                            <div class="input-row">
+                                <div class="input-group">
+                                    <label for="deviceBranch">Branch:</label>
+                                    <select id="deviceBranch" class="form-control">
+                                        <option value="main">Main Branch</option>
+                                        <option value="warehouse">Warehouse</option>
+                                        <option value="security">Security</option>
+                                        <option value="reception">Reception</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="deviceLocation">Location:</label>
+                                    <input type="text" id="deviceLocation" placeholder="Optional" class="form-control">
+                                </div>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="autoConnect" checked>
+                                <label for="autoConnect">Auto-connect after adding</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Network Scanner Section -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-search"></i> Network Scanner</h3>
+                </div>
+                <div class="card-content">
+                    <div class="scanner-controls">
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="networkRange">Network Range:</label>
+                                <input type="text" id="networkRange" placeholder="192.168.1.0/24 or 192.168.1.1-192.168.1.50" class="form-control">
+                            </div>
+                            <button onclick="scanNetwork()" class="btn btn-primary" id="scanBtn">
+                                <i class="fas fa-radar"></i> Scan Network
+                            </button>
+                        </div>
+                        <div class="scan-options">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="scanAutoAdd">
+                                <label for="scanAutoAdd">Auto-add discovered devices</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="scanAutoConnect">
+                                <label for="scanAutoConnect">Auto-connect after adding</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Scan Results -->
+                    <div id="scanResults" class="scan-results" style="display:none;">
+                        <h4>Scan Results</h4>
+                        <div class="table-responsive">
+                            <table class="scan-table">
+                                <thead>
+                                    <tr>
+                                        <th>IP Address</th>
+                                        <th>Port</th>
+                                        <th>Model</th>
+                                        <th>Response Time</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="scanResultsBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Device List -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-list"></i> Managed Devices</h3>
+                    <div class="device-stats" id="deviceStats">
+                        <span class="stat online">Online: 0</span>
+                        <span class="stat offline">Offline: 0</span>
+                        <span class="stat total">Total: 0</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="device-grid" id="deviceGrid">
+                        <div class="loading-message">Loading devices...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HR Management Section -->
+        <section id="hr-management" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-users-cog"></i> HR Management</h2>
+                <div class="section-actions">
+                    <button id="addEmployeeBtn" class="btn btn-success">
+                        <i class="fas fa-user-plus"></i> Add Employee
+                    </button>
+                    <button id="exportHRData" class="btn btn-secondary">
+                        <i class="fas fa-download"></i> Export Data
+                    </button>
+                    <button id="migrateUsersBtn" class="btn btn-info">
+                        <i class="fas fa-sync"></i> Migrate Biometric Users
+                    </button>
+                </div>
+            </div>
+
+            <!-- Employee Overview Cards -->
+            <div class="dashboard-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-bar"></i> Employee Statistics</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="stats-grid" id="employeeStats">
+                            <div class="stat-item">
+                                <div class="stat-value" id="totalEmployees">0</div>
+                                <div class="stat-label">Total Employees</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="activeEmployees">0</div>
+                                <div class="stat-label">Active</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="totalBranches">0</div>
+                                <div class="stat-label">Branches</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="totalDepartments">0</div>
+                                <div class="stat-label">Departments</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-building"></i> Branch Overview</h3>
+                    </div>
+                    <div class="card-content">
+                        <div id="branchOverview">
+                            <div class="branch-item">
+                                <span class="branch-name">Main Office</span>
+                                <span class="branch-count">25 employees</span>
+                            </div>
+                            <div class="branch-item">
+                                <span class="branch-name">Warehouse</span>
+                                <span class="branch-count">15 employees</span>
+                            </div>
+                            <div class="branch-item">
+                                <span class="branch-name">Security</span>
+                                <span class="branch-count">8 employees</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employee Management Table -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-table"></i> Employee Directory</h3>
+                    <div class="search-box">
+                        <input type="text" id="employeeSearch" placeholder="Search employees...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="filter-controls">
+                        <select id="branchFilter">
+                            <option value="">All Branches</option>
+                            <option value="main">Main Office</option>
+                            <option value="warehouse">Warehouse</option>
+                            <option value="security">Security</option>
+                        </select>
+                        <select id="departmentFilter">
+                            <option value="">All Departments</option>
+                            <option value="administration">Administration</option>
+                            <option value="operations">Operations</option>
+                            <option value="security">Security</option>
+                        </select>
+                        <select id="statusFilter">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Employee ID</th>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Department</th>
+                                    <th>Branch</th>
+                                    <th>Hire Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="employeeTableBody">
+                                <tr>
+                                    <td colspan="8" class="loading">Loading employees...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Attendance Tracking Section -->
+        <section id="attendance-tracking" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-clock"></i> Attendance Tracking</h2>
+                <div class="section-actions">
+                    <button id="refreshAttendance" class="btn btn-secondary">
+                        <i class="fas fa-sync"></i> Refresh
+                    </button>
+                    <button id="exportAttendanceData" class="btn btn-info">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+            </div>
+
+            <!-- Real-time Attendance Dashboard -->
+            <div class="dashboard-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-tachometer-alt"></i> Today's Overview</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="attendance-overview">
+                            <div class="attendance-stat present">
+                                <div class="stat-number" id="presentCount">0</div>
+                                <div class="stat-label">Present</div>
+                            </div>
+                            <div class="attendance-stat absent">
+                                <div class="stat-number" id="absentCount">0</div>
+                                <div class="stat-label">Absent</div>
+                            </div>
+                            <div class="attendance-stat late">
+                                <div class="stat-number" id="lateCount">0</div>
+                                <div class="stat-label">Late</div>
+                            </div>
+                            <div class="attendance-stat leave">
+                                <div class="stat-number" id="onLeaveCount">0</div>
+                                <div class="stat-label">On Leave</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> Attendance Trends</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="trend-chart">
+                            <div class="trend-item">
+                                <span class="trend-day">Mon</span>
+                                <div class="trend-bar">
+                                    <div class="trend-fill" style="width: 95%"></div>
+                                </div>
+                                <span class="trend-percent">95%</span>
+                            </div>
+                            <div class="trend-item">
+                                <span class="trend-day">Tue</span>
+                                <div class="trend-bar">
+                                    <div class="trend-fill" style="width: 88%"></div>
+                                </div>
+                                <span class="trend-percent">88%</span>
+                            </div>
+                            <div class="trend-item">
+                                <span class="trend-day">Wed</span>
+                                <div class="trend-bar">
+                                    <div class="trend-fill" style="width: 92%"></div>
+                                </div>
+                                <span class="trend-percent">92%</span>
+                            </div>
+                            <div class="trend-item">
+                                <span class="trend-day">Thu</span>
+                                <div class="trend-bar">
+                                    <div class="trend-fill" style="width: 90%"></div>
+                                </div>
+                                <span class="trend-percent">90%</span>
+                            </div>
+                            <div class="trend-item">
+                                <span class="trend-day">Fri</span>
+                                <div class="trend-bar">
+                                    <div class="trend-fill" style="width: 85%"></div>
+                                </div>
+                                <span class="trend-percent">85%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Attendance Feed -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-stream"></i> Live Attendance Feed</h3>
+                    <div class="filter-controls">
+                        <input type="date" id="attendanceDate" class="form-control">
+                        <select id="attendanceBranchFilter" class="form-control">
+                            <option value="">All Branches</option>
+                            <option value="main">Main Office</option>
+                            <option value="warehouse">Warehouse</option>
+                            <option value="security">Security</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="attendance-feed" id="attendanceFeed">
+                        <div class="feed-item">
+                            <div class="feed-time">08:03 AM</div>
+                            <div class="feed-employee">Juan Dela Cruz</div>
+                            <div class="feed-action time-in">Clock In</div>
+                            <div class="feed-device">Main Office Scanner</div>
+                        </div>
+                        <div class="feed-item">
+                            <div class="feed-time">08:05 AM</div>
+                            <div class="feed-employee">Maria Santos</div>
+                            <div class="feed-action time-in">Clock In</div>
+                            <div class="feed-device">Warehouse Scanner</div>
+                        </div>
+                        <div class="feed-item">
+                            <div class="feed-time">08:15 AM</div>
+                            <div class="feed-employee">Carlos Reyes</div>
+                            <div class="feed-action time-in late">Clock In (Late)</div>
+                            <div class="feed-device">Security Gate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exception Management -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Attendance Exceptions</h3>
+                    <span class="badge badge-warning" id="exceptionCount">3 pending</span>
+                </div>
+                <div class="card-content">
+                    <div class="exception-list" id="exceptionList">
+                        <div class="exception-item">
+                            <div class="exception-info">
+                                <div class="exception-employee">Ana Garcia</div>
+                                <div class="exception-type">Missing Clock Out</div>
+                                <div class="exception-date">Today, 5:30 PM expected</div>
+                            </div>
+                            <div class="exception-actions">
+                                <button class="btn btn-sm btn-success">Resolve</button>
+                                <button class="btn btn-sm btn-info">Contact</button>
+                            </div>
+                        </div>
+                        <div class="exception-item">
+                            <div class="exception-info">
+                                <div class="exception-employee">Roberto Lim</div>
+                                <div class="exception-type">Extended Break</div>
+                                <div class="exception-date">Today, 12:00 PM - ongoing</div>
+                            </div>
+                            <div class="exception-actions">
+                                <button class="btn btn-sm btn-success">Resolve</button>
+                                <button class="btn btn-sm btn-info">Contact</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payroll System Section -->
+        <section id="payroll-system" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-money-bill-wave"></i> Payroll System</h2>
+                <div class="section-actions">
+                    <button id="processPayrollBtn" class="btn btn-success">
+                        <i class="fas fa-play"></i> Process Payroll
+                    </button>
+                    <button id="payrollReportsBtn" class="btn btn-info">
+                        <i class="fas fa-chart-bar"></i> Reports
+                    </button>
+                </div>
+            </div>
+
+            <!-- Payroll Overview -->
+            <div class="dashboard-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-calculator"></i> Current Pay Period</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="payroll-period">
+                            <div class="period-info">
+                                <div class="period-dates">
+                                    <span class="period-label">Period:</span>
+                                    <span class="period-value">September 1-15, 2025</span>
+                                </div>
+                                <div class="period-status">
+                                    <span class="period-label">Status:</span>
+                                    <span class="status-badge processing">Processing</span>
+                                </div>
+                                <div class="period-paydate">
+                                    <span class="period-label">Pay Date:</span>
+                                    <span class="period-value">September 20, 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-peso-sign"></i> Payroll Summary</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="payroll-summary">
+                            <div class="summary-item">
+                                <div class="summary-label">Gross Pay</div>
+                                <div class="summary-value">₱1,250,000.00</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Total Deductions</div>
+                                <div class="summary-value">₱287,500.00</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Net Pay</div>
+                                <div class="summary-value total">₱962,500.00</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Employees</div>
+                                <div class="summary-value">48 employees</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payroll Processing Steps -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-tasks"></i> Payroll Processing</h3>
+                </div>
+                <div class="card-content">
+                    <div class="processing-steps">
+                        <div class="step completed">
+                            <div class="step-indicator">1</div>
+                            <div class="step-content">
+                                <div class="step-title">Attendance Verification</div>
+                                <div class="step-status">Completed</div>
+                            </div>
+                            <div class="step-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="step completed">
+                            <div class="step-indicator">2</div>
+                            <div class="step-content">
+                                <div class="step-title">Leave & Overtime Calculation</div>
+                                <div class="step-status">Completed</div>
+                            </div>
+                            <div class="step-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="step active">
+                            <div class="step-indicator">3</div>
+                            <div class="step-content">
+                                <div class="step-title">Salary & Deductions</div>
+                                <div class="step-status">In Progress</div>
+                            </div>
+                            <div class="step-icon">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                        <div class="step pending">
+                            <div class="step-indicator">4</div>
+                            <div class="step-content">
+                                <div class="step-title">Review & Approval</div>
+                                <div class="step-status">Pending</div>
+                            </div>
+                            <div class="step-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                        </div>
+                        <div class="step pending">
+                            <div class="step-indicator">5</div>
+                            <div class="step-content">
+                                <div class="step-title">Generate Payslips</div>
+                                <div class="step-status">Pending</div>
+                            </div>
+                            <div class="step-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employee Payroll List -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-users"></i> Employee Payroll</h3>
+                    <div class="search-box">
+                        <input type="text" id="payrollSearch" placeholder="Search employees...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Employee</th>
+                                    <th>Position</th>
+                                    <th>Days Worked</th>
+                                    <th>Regular Hours</th>
+                                    <th>Overtime</th>
+                                    <th>Gross Pay</th>
+                                    <th>Deductions</th>
+                                    <th>Net Pay</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="payrollTableBody">
+                                <tr>
+                                    <td>Juan Dela Cruz</td>
+                                    <td>Senior Underwriter</td>
+                                    <td>10</td>
+                                    <td>80.0</td>
+                                    <td>2.5</td>
+                                    <td>₱22,750.00</td>
+                                    <td>₱2,847.00</td>
+                                    <td>₱19,903.00</td>
+                                    <td><span class="status-badge calculated">Calculated</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info">View</button>
+                                        <button class="btn btn-sm btn-warning">Edit</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Maria Santos</td>
+                                    <td>Claims Processor</td>
+                                    <td>10</td>
+                                    <td>80.0</td>
+                                    <td>5.0</td>
+                                    <td>₱18,250.00</td>
+                                    <td>₱2,281.25</td>
+                                    <td>₱15,968.75</td>
+                                    <td><span class="status-badge calculated">Calculated</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info">View</button>
+                                        <button class="btn btn-sm btn-warning">Edit</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Carlos Reyes</td>
+                                    <td>IT Support</td>
+                                    <td>10</td>
+                                    <td>80.0</td>
+                                    <td>0.0</td>
+                                    <td>₱14,000.00</td>
+                                    <td>₱1,750.00</td>
+                                    <td>₱12,250.00</td>
+                                    <td><span class="status-badge processing">Processing</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info">View</button>
+                                        <button class="btn btn-sm btn-warning">Edit</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Device Settings Section -->
+        <section id="device" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-cog"></i> Device Settings</h2>
+            </div>
+
+            <div class="settings-grid">
+                <!-- Volume Settings -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-volume-up"></i> Sound Volume</h3>
+                    </div>
+                    <div class="card-content">
+                        <form id="volumeForm">
+                            <div class="form-group">
+                                <label for="volumeSlider">Volume (1-10):</label>
+                                <input type="range" id="volumeSlider" min="1" max="10" value="5">
+                                <span id="volumeValue">5</span>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Volume</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Verification Mode -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-shield-alt"></i> Verification Mode</h3>
+                    </div>
+                    <div class="card-content">
+                        <form id="verifyModeForm">
+                            <div class="form-group">
+                                <label for="verifyModeSelect">Verification Mode:</label>
+                                <select id="verifyModeSelect">
+                                    <option value="0">Any</option>
+                                    <option value="1">Fingerprint</option>
+                                    <option value="2">Card + Fingerprint</option>
+                                    <option value="3">Card</option>
+                                    <option value="4">ID + Fingerprint</option>
+                                    <option value="5">ID + Password</option>
+                                    <option value="6">Card + Password</option>
+                                    <option value="7">Fingerprint + Password</option>
+                                    <option value="8">Fingerprint + Card + Password</option>
+                                    <option value="9">Face</option>
+                                    <option value="10">Card + Face</option>
+                                    <option value="11">Face + Password</option>
+                                    <option value="12">Face + Card + Password</option>
+                                    <option value="13">Face + Fingerprint</option>
+                                    <option value="14">Face + Fingerprint + Card</option>
+                                    <option value="15">Face + Fingerprint + Password</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Mode</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Time Settings -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-clock"></i> Time Settings</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="info-item">
+                            <span class="label">Current Device Time:</span>
+                            <span class="value" id="currentDeviceTime">Loading...</span>
+                        </div>
+                        <div class="form-actions">
+                            <button id="syncTimeBtn" class="btn btn-primary">
+                                <i class="fas fa-sync-alt"></i> Sync to System Time
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Device Control -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-tools"></i> Device Control</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="control-actions">
+                            <select id="deviceControlAction">
+                                <option value="">Select Action...</option>
+                                <option value="ClearAttendLog">Clear Attendance Logs</option>
+                                <option value="ClearAdminLog">Clear Admin Logs</option>
+                                <option value="ClearUsers">Clear Users</option>
+                                <option value="ClearAdmins">Clear Admins</option>
+                                <option value="ClearAllData">Clear All Data</option>
+                            </select>
+                            <button id="executeControlAction" class="btn btn-danger" disabled>
+                                <i class="fas fa-exclamation-triangle"></i> Execute
+                            </button>
+                        </div>
+                        <div class="warning-text">
+                            <i class="fas fa-warning"></i> Warning: These actions cannot be undone!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Management Section -->
+        <section id="users" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-users"></i> User Management</h2>
+                <div class="section-actions">
+                    <button id="addUserBtn" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> Add User
+                    </button>
+                    <button id="refreshUsers" class="btn btn-secondary">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+            </div>
+
+            <!-- User List -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-list"></i> Users</h3>
+                    <div class="search-box">
+                        <input type="text" id="userSearch" placeholder="Search users...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="table-container">
+                        <table id="usersTable" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Privilege</th>
+                                    <th>Biometrics</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <tr>
+                                    <td colspan="6" class="loading">Loading users...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add/Edit User Modal -->
+            <div id="userModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 id="userModalTitle"><i class="fas fa-user-edit"></i> Edit User</h3>
+                        <button class="modal-close" onclick="closeModal('userModal')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <form id="userForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="userId">User ID:</label>
+                                <input type="text" id="userId" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="userName">Name:</label>
+                                <input type="text" id="userName" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="userDepartment">Department:</label>
+                                <input type="text" id="userDepartment">
+                            </div>
+                            <div class="form-group">
+                                <label for="userPrivilege">Privilege:</label>
+                                <select id="userPrivilege">
+                                    <option value="user">User</option>
+                                    <option value="manager">Manager</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="userPassword">Password:</label>
+                                <input type="password" id="userPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="userCard">Card Number:</label>
+                                <input type="text" id="userCard">
+                            </div>
+                        </div>
+                        
+                        <!-- HR Information Section -->
+                        <div class="form-section">
+                            <h4><i class="fas fa-briefcase"></i> HR Information</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="userPosition">Position:</label>
+                                    <input type="text" id="userPosition" placeholder="e.g., Software Engineer">
+                                </div>
+                                <div class="form-group">
+                                    <label for="userBranch">Branch:</label>
+                                    <select id="userBranch">
+                                        <option value="main">Main Office</option>
+                                        <option value="warehouse">Warehouse</option>
+                                        <option value="security">Security</option>
+                                        <option value="reception">Reception</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="userEmail">Email:</label>
+                                    <input type="email" id="userEmail" placeholder="user@company.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="userPhone">Phone:</label>
+                                    <input type="tel" id="userPhone" placeholder="+63 XXX XXX XXXX">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="userHireDate">Hire Date:</label>
+                                    <input type="date" id="userHireDate">
+                                </div>
+                                <div class="form-group">
+                                    <label for="userSalary">Monthly Salary:</label>
+                                    <input type="number" id="userSalary" min="0" placeholder="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="closeModal('userModal')">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save User
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Biometric Enrollment Section -->
+        <section id="enrollment" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-user-plus"></i> Biometric Enrollment</h2>
+            </div>
+
+            <div class="enrollment-grid">
+                <!-- Face Enrollment -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-smile"></i> Face Enrollment</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="enrollment-controls">
+                            <button id="startFaceEnrollment" class="btn btn-primary">
+                                <i class="fas fa-camera"></i> Start Face Enrollment
+                            </button>
+                            <div class="enrollment-status" id="faceEnrollmentStatus"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fingerprint Enrollment -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-fingerprint"></i> Fingerprint Enrollment</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="enrollment-controls">
+                            <button id="startFingerprintEnrollment" class="btn btn-primary">
+                                <i class="fas fa-fingerprint"></i> Start Fingerprint Enrollment
+                            </button>
+                            <div class="enrollment-status" id="fingerprintEnrollmentStatus"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Enrollment -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-id-card"></i> Card Enrollment</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="enrollment-controls">
+                            <button id="startCardEnrollment" class="btn btn-primary">
+                                <i class="fas fa-id-card"></i> Start Card Enrollment
+                            </button>
+                            <div class="enrollment-status" id="cardEnrollmentStatus"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Palm Enrollment -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-hand-paper"></i> Palm Enrollment</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="enrollment-controls">
+                            <button id="startPalmEnrollment" class="btn btn-primary">
+                                <i class="fas fa-hand-paper"></i> Start Palm Enrollment
+                            </button>
+                            <div class="enrollment-status" id="palmEnrollmentStatus"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo to Face Conversion -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-image"></i> Photo to Face Data</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="photo-upload">
+                            <input type="file" id="photoInput" accept="image/jpeg" style="display: none;">
+                            <button id="selectPhotoBtn" class="btn btn-secondary">
+                                <i class="fas fa-upload"></i> Select Photo
+                            </button>
+                            <button id="convertPhotoBtn" class="btn btn-primary" disabled>
+                                <i class="fas fa-magic"></i> Convert to Face Data
+                            </button>
+                            <div class="conversion-status" id="photoConversionStatus"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Jobs -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-tasks"></i> Active Enrollment Jobs</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="active-jobs" id="activeJobs">
+                            <div class="no-jobs">No active enrollment jobs</div>
+                        </div>
+                        <div class="form-actions">
+                            <button id="cancelAllJobs" class="btn btn-danger">
+                                <i class="fas fa-stop"></i> Cancel All Jobs
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Attendance Records Section -->
+        <section id="attendance" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-clock"></i> Attendance Records</h2>
+                <div class="section-actions">
+                    <button id="refreshAttendance" class="btn btn-secondary">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                    <button id="exportAttendance" class="btn btn-info">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+            </div>
+
+            <!-- Attendance Logs -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-list"></i> Recent Attendance Logs</h3>
+                    <div class="filter-controls">
+                        <input type="date" id="dateFilter" class="form-control">
+                        <select id="userFilter" class="form-control">
+                            <option value="">All Users</option>
+                        </select>
+                        <button id="applyFilters" class="btn btn-primary">Filter</button>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="table-container">
+                        <table id="attendanceTable" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>Time</th>
+                                    <th>Verification Method</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="attendanceTableBody">
+                                <tr>
+                                    <td colspan="4" class="loading">Loading attendance records...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination" id="attendancePagination"></div>
+                </div>
+            </div>
+
+            <!-- Attendance Configuration -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-upload"></i> Attendance Log Uploader</h3>
+                </div>
+                <div class="card-content">
+                    <form id="uploaderConfigForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="targetUri">Target URI:</label>
+                                <input type="url" id="targetUri" placeholder="http://your-server.com/attendance">
+                            </div>
+                            <div class="form-group">
+                                <label for="uploadInterval">Upload Interval (seconds):</label>
+                                <input type="number" id="uploadInterval" min="5" max="3600" value="300">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Configure Uploader
+                            </button>
+                            <button type="button" id="checkUploaderStatus" class="btn btn-info">
+                                <i class="fas fa-info-circle"></i> Check Status
+                            </button>
+                        </div>
+                    </form>
+                    <div class="uploader-status" id="uploaderStatus"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Network Configuration Section -->
+        <section id="network" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-network-wired"></i> Network Configuration</h2>
+                <button id="refreshNetwork" class="btn btn-secondary">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+            </div>
+
+            <!-- Current Network Status -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-info-circle"></i> Current Network Status</h3>
+                </div>
+                <div class="card-content">
+                    <div class="network-status" id="networkStatus">
+                        Loading network information...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ethernet Configuration -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-ethernet"></i> Ethernet Configuration</h3>
+                </div>
+                <div class="card-content">
+                    <form id="ethernetConfigForm">
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="ethernetDhcp">
+                            <label for="ethernetDhcp">Use DHCP</label>
+                        </div>
+                        <div id="ethernetStaticConfig">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="ethernetIp">IP Address:</label>
+                                    <input type="text" id="ethernetIp" placeholder="192.168.1.100">
+                                </div>
+                                <div class="form-group">
+                                    <label for="ethernetNetmask">Netmask:</label>
+                                    <input type="text" id="ethernetNetmask" placeholder="255.255.255.0">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="ethernetGateway">Gateway:</label>
+                                    <input type="text" id="ethernetGateway" placeholder="192.168.1.1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="ethernetDns">DNS Servers (comma-separated):</label>
+                                    <input type="text" id="ethernetDns" placeholder="8.8.8.8, 8.8.4.4">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Ethernet Configuration
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- WiFi Configuration -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-wifi"></i> WiFi Configuration</h3>
+                </div>
+                <div class="card-content">
+                    <form id="wifiConfigForm">
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="wifiDhcp" checked>
+                            <label for="wifiDhcp">Use DHCP</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="wifiSsid">WiFi Network (SSID):</label>
+                            <input type="text" id="wifiSsid" placeholder="MyWiFiNetwork">
+                        </div>
+                        <div class="form-group">
+                            <label for="wifiPassword">Password:</label>
+                            <input type="password" id="wifiPassword" placeholder="WiFi Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save WiFi Configuration
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- API Keys Management Section -->
+        <section id="api-keys" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-key"></i> API Key Management</h2>
+                <div class="section-actions">
+                    <button id="generateApiKey" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Generate New Key
+                    </button>
+                    <button id="refreshApiKeys" class="btn btn-secondary">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+            </div>
+
+            <!-- API Key Statistics -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-bar"></i> API Key Statistics</h3>
+                </div>
+                <div class="card-content">
+                    <div class="api-key-stats" id="apiKeyStats">
+                        Loading statistics...
+                    </div>
+                </div>
+            </div>
+
+            <!-- API Keys List -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-list"></i> API Keys</h3>
+                    <div class="section-actions">
+                        <button id="createDefaults" class="btn btn-info">
+                            <i class="fas fa-magic"></i> Create Defaults
+                        </button>
+                        <button id="cleanupKeys" class="btn btn-warning">
+                            <i class="fas fa-broom"></i> Cleanup Old
+                        </button>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="table-container">
+                        <table id="apiKeysTable" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Key Preview</th>
+                                    <th>Device ID</th>
+                                    <th>Created</th>
+                                    <th>Last Used</th>
+                                    <th>Usage Count</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="apiKeysTableBody">
+                                <tr>
+                                    <td colspan="8" class="loading">Loading API keys...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generate API Key Modal -->
+            <div id="generateKeyModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3><i class="fas fa-key"></i> Generate New API Key</h3>
+                        <button class="modal-close" onclick="closeModal('generateKeyModal')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <form id="generateKeyForm">
+                        <div class="form-group">
+                            <label for="keyName">Key Name:</label>
+                            <input type="text" id="keyName" required placeholder="e.g., Production Device Key">
+                        </div>
+                        <div class="form-group">
+                            <label for="keyDeviceId">Device ID (optional):</label>
+                            <input type="text" id="keyDeviceId" placeholder="e.g., device-001">
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="closeModal('generateKeyModal')">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-key"></i> Generate Key
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Show Generated Key Modal -->
+            <div id="showKeyModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3><i class="fas fa-key"></i> API Key Generated</h3>
+                        <button class="modal-close" onclick="closeModal('showKeyModal')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="generated-key-content">
+                        <div class="warning-text">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong>Important:</strong> This is the only time you'll see the full API key. Copy it now!
+                        </div>
+                        <div class="form-group">
+                            <label for="generatedKeyDisplay">Your New API Key:</label>
+                            <div class="key-display">
+                                <input type="text" id="generatedKeyDisplay" readonly>
+                                <button id="copyKeyBtn" class="btn btn-secondary" type="button">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="generatedKeyQR">QR Code for Device Setup:</label>
+                            <div class="qr-code-container" id="generatedKeyQR">
+                                <!-- QR code will be generated here -->
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-primary" onclick="closeModal('showKeyModal')">
+                                <i class="fas fa-check"></i> Done
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit API Key Modal -->
+            <div id="editKeyModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3><i class="fas fa-edit"></i> Edit API Key</h3>
+                        <button class="modal-close" onclick="closeModal('editKeyModal')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <form id="editKeyForm">
+                        <input type="hidden" id="editKeyId">
+                        <div class="form-group">
+                            <label for="editKeyName">Key Name:</label>
+                            <input type="text" id="editKeyName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editKeyPermissions">Permissions:</label>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="permRead" value="read">
+                                <label for="permRead">Read</label>
+                                <input type="checkbox" id="permWrite" value="write">
+                                <label for="permWrite">Write</label>
+                                <input type="checkbox" id="permAdmin" value="admin">
+                                <label for="permAdmin">Admin</label>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="closeModal('editKeyModal')">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Branch Management Section -->
+        <section id="branch-management" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-building"></i> Branch Management</h2>
+                <div class="section-actions">
+                    <button id="addBranchBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add New Branch
+                    </button>
+                    <button id="refreshBranches" class="btn btn-secondary">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+            </div>
+
+            <!-- Branch Overview Stats -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-bar"></i> Branch Overview</h3>
+                </div>
+                <div class="card-content">
+                    <div class="branch-overview-stats" id="branchOverviewStats">
+                        <div class="stat-item">
+                            <div class="stat-number" id="totalBranches">0</div>
+                            <div class="stat-label">Total Branches</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="activeBranches">0</div>
+                            <div class="stat-label">Active Branches</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="totalEmployeesAcrossBranches">0</div>
+                            <div class="stat-label">Total Employees</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="connectedDevices">0</div>
+                            <div class="stat-label">Connected Devices</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Branches List -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-list"></i> All Branches</h3>
+                </div>
+                <div class="card-content">
+                    <div id="branchesLoading" class="loading-message">
+                        <i class="fas fa-spinner fa-spin"></i> Loading branches...
+                    </div>
+                    <div id="branchesGrid" class="branches-grid" style="display: none;"></div>
+                    <div id="noBranches" class="empty-state" style="display: none;">
+                        <i class="fas fa-building" style="font-size: 48px; color: #ccc; margin-bottom: 16px;"></i>
+                        <h3>No branches found</h3>
+                        <p>Add your first branch to get started organizing your locations!</p>
+                        <button class="btn btn-primary" onclick="showBranchModal()">
+                            <i class="fas fa-plus"></i> Add First Branch
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p id="loadingMessage">Loading...</p>
+        </div>
+    </main>
+
+    <!-- Branch Management Modals -->
+    <div id="branchModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="branchModalTitle"><i class="fas fa-building"></i> Add New Branch</h3>
+                <button class="modal-close" onclick="closeBranchModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="branchForm">
+                <input type="hidden" id="branchId">
+                <div class="card-content">
+                    <div class="form-group">
+                        <label for="branchName">Branch Name *</label>
+                        <input type="text" id="branchName" required placeholder="e.g., Main Office">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="branchCode">Branch Code</label>
+                            <input type="text" id="branchCode" placeholder="e.g., MAIN">
+                        </div>
+                        <div class="form-group">
+                            <label for="branchPhone">Phone</label>
+                            <input type="tel" id="branchPhone" placeholder="+1 (555) 123-4567">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="branchAddress">Address</label>
+                        <textarea id="branchAddress" rows="3" placeholder="Street address, city, state, zip"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="branchManager">Manager</label>
+                            <input type="text" id="branchManager" placeholder="Manager name">
+                        </div>
+                        <div class="form-group">
+                            <label for="branchEmail">Email</label>
+                            <input type="email" id="branchEmail" placeholder="manager@company.com">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="branchTimezone">Timezone</label>
+                            <select id="branchTimezone">
+                                <option value="UTC">UTC</option>
+                                <option value="America/New_York">Eastern Time</option>
+                                <option value="America/Chicago">Central Time</option>
+                                <option value="America/Denver">Mountain Time</option>
+                                <option value="America/Los_Angeles" selected>Pacific Time</option>
+                                <option value="Europe/London">London</option>
+                                <option value="Europe/Paris">Paris</option>
+                                <option value="Asia/Tokyo">Tokyo</option>
+                                <option value="Asia/Shanghai">Shanghai</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="branchStatus">Status</label>
+                            <select id="branchStatus">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="branchNotes">Notes</label>
+                        <textarea id="branchNotes" rows="2" placeholder="Additional notes or comments"></textarea>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeBranchModal()">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> <span id="branchSubmitText">Save Branch</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div class="notifications" id="notifications"></div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+🚀 Starting Mock Biometric Devices...
+=========================================
+📱 Starting branch-main device on port 4001...
+🏢 Starting branch-warehouse device on port 4002...
+🔒 Starting branch-security device on port 4003...
+🏨 Starting reception-desk device on port 4004...
+🔧 Mock Biometric Device: branch-warehouse
+🔑 API Key: warehouse456
+🌐 Starting on port 4002...
+🔧 Mock Biometric Device: reception-desk
+🔑 API Key: reception123
+🌐 Starting on port 4004...
+🔧 Mock Biometric Device: branch-main
+🔑 API Key: main123
+🌐 Starting on port 4001...
+🔧 Mock Biometric Device: branch-security
+🔑 API Key: security789
+🌐 Starting on port 4003...
+🚀 Mock biometric device 'branch-warehouse' running on http://127.0.0.1:4002
+📋 Available endpoints:
+   GET  /health - Health check
+   GET  /status - Device status (requires API key)
+   POST /scan - Trigger fingerprint scan (requires API key)
+   POST /enroll - Enroll new user (requires API key)
+🚀 Mock biometric device 'reception-desk' running on http://127.0.0.1:4004
+📋 Available endpoints:
+   GET  /health - Health check
+   GET  /status - Device status (requires API key)
+   POST /scan - Trigger fingerprint scan (requires API key)
+🚀 Mock biometric device 'branch-main' running on http://127.0.0.1:4001
+   POST /enroll - Enroll new user (requires API key)
+📋 Available endpoints:
+   GET  /health - Health check
+   GET  /status - Device status (requires API key)
+   POST /scan - Trigger fingerprint scan (requires API key)
+   POST /enroll - Enroll new user (requires API key)
+🚀 Mock biometric device 'branch-security' running on http://127.0.0.1:4003
+📋 Available endpoints:
+   GET  /health - Health check
+   GET  /status - Device status (requires API key)
+   POST /scan - Trigger fingerprint scan (requires API key)
+   POST /enroll - Enroll new user (requires API key)
+
+✅ All mock devices started!
+=========================================
+📋 Device Status:
+   branch-main:      http://127.0.0.1:4001 (PID: 27102)
+   branch-warehouse: http://127.0.0.1:4002 (PID: 27103)
+   branch-security:  http://127.0.0.1:4003 (PID: 27104)
+   reception-desk:   http://127.0.0.1:4004 (PID: 27105)
+
+🧪 Test endpoints:
+   curl http://127.0.0.1:4001/health
+   curl -H 'x-api-key: main123' http://127.0.0.1:4001/status
+
+🛑 To stop all devices: pkill -f mock-device.js
+⌨️  Press Ctrl+C to stop all devices
+🔧 Biometric command: GetVersionInfo (8eb35c45)
+🔧 Biometric command: GetVersionInfo (73cd3116)
+🔧 Biometric command: GetVersionInfo (fafe7227)
+🔧 Biometric command: GetVersionInfo (a3e1d182)
+
+🛑 Shutting down mock device 'branch-security'...
+
+🛑 Shutting down mock device 'branch-main'...
+
+🛑 Shutting down mock device 'reception-desk'...
+
+🛑 Shutting down mock device 'branch-warehouse'...

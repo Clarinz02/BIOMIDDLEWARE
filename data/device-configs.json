@@ -1,0 +1,62 @@
+[
+  {
+    "deviceId": "branch-main",
+    "name": "Main Branch Scanner",
+    "ip": "127.0.0.1",
+    "port": 4001,
+    "apiKey": "main123",
+    "useHttps": false,
+    "wifiNetwork": "LocalNetwork",
+    "branch": "main",
+    "location": "Main Office (Mock)",
+    "autoReconnect": true,
+    "createdAt": "2025-09-06T06:42:13.497Z",
+    "lastConnected": "2025-09-06T08:17:30.122Z",
+    "status": "disconnected"
+  },
+  {
+    "deviceId": "branch-warehouse",
+    "name": "Warehouse Scanner",
+    "ip": "127.0.0.1",
+    "port": 4002,
+    "apiKey": "warehouse456",
+    "useHttps": false,
+    "wifiNetwork": "LocalNetwork",
+    "branch": "warehouse",
+    "location": "Warehouse (Mock)",
+    "autoReconnect": true,
+    "createdAt": "2025-09-06T06:42:18.350Z",
+    "lastConnected": "2025-09-06T08:17:30.152Z",
+    "status": "disconnected"
+  },
+  {
+    "deviceId": "branch-security",
+    "name": "Security Gate Scanner",
+    "ip": "127.0.0.1",
+    "port": 4003,
+    "apiKey": "security789",
+    "useHttps": false,
+    "wifiNetwork": "LocalNetwork",
+    "branch": "security",
+    "location": "Security Gate (Mock)",
+    "autoReconnect": true,
+    "createdAt": "2025-09-06T06:42:24.709Z",
+    "lastConnected": "2025-09-06T08:17:30.197Z",
+    "status": "disconnected"
+  },
+  {
+    "deviceId": "reception-desk",
+    "name": "Reception Desk Scanner",
+    "ip": "127.0.0.1",
+    "port": 4004,
+    "apiKey": "reception123",
+    "useHttps": false,
+    "wifiNetwork": "LocalNetwork",
+    "branch": "reception",
+    "location": "Front Desk (Mock)",
+    "autoReconnect": true,
+    "createdAt": "2025-09-06T06:56:24.888Z",
+    "lastConnected": "2025-09-06T08:17:30.253Z",
+    "status": "disconnected"
+  }
+]

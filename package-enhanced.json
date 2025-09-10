@@ -1,0 +1,120 @@
+{
+  "name": "biometric-device-middleware",
+  "version": "2.0.0",
+  "description": "Enterprise Multi-Device Biometric Management System with TypeScript, React Dashboard, and Advanced Analytics",
+  "main": "simple-server.js",
+  "scripts": {
+    "start": "node simple-server.js",
+    "dev": "nodemon --exec ts-node src/server.ts",
+    "build": "tsc && npm run build:frontend",
+    "build:watch": "tsc --watch",
+    "build:frontend": "cd frontend && npm run build",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write src/**/*.ts",
+    "format:check": "prettier --check src/**/*.ts",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "migrate": "knex migrate:latest",
+    "migrate:rollback": "knex migrate:rollback",
+    "seed": "knex seed:run",
+    "docker:build": "docker build -t biometric-hub .",
+    "docker:run": "docker run -p 3000:3000 biometric-hub",
+    "prepare": "husky install",
+    "precommit": "lint-staged"
+  },
+  "keywords": [
+    "biometric",
+    "middleware",
+    "multi-device",
+    "enterprise",
+    "attendance",
+    "fingerprint",
+    "face-recognition",
+    "access-control",
+    "typescript",
+    "react",
+    "analytics",
+    "security"
+  ],
+  "author": "Biometric Hub Team",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "uuid": "^9.0.0",
+    "express": "^4.18.0",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "socket.io": "^4.7.0",
+    "pg": "^8.11.0",
+    "knex": "^3.0.0",
+    "redis": "^4.6.0",
+    "bull": "^4.11.0",
+    "winston": "^3.11.0",
+    "joi": "^17.11.0",
+    "multer": "^1.4.5-lts.1",
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0",
+    "node-cron": "^3.0.0",
+    "compression": "^1.7.4",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/express": "^4.17.0",
+    "@types/cors": "^2.8.0",
+    "@types/bcryptjs": "^2.4.0",
+    "@types/jsonwebtoken": "^9.0.0",
+    "@types/multer": "^1.4.0",
+    "@types/uuid": "^9.0.0",
+    "@types/pg": "^8.10.0",
+    "@types/jest": "^29.5.0",
+    "@types/supertest": "^2.0.0",
+    "@types/compression": "^1.7.0",
+    "@types/morgan": "^1.9.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.45.0",
+    "eslint-plugin-security": "^1.7.0",
+    "eslint-plugin-import": "^2.28.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.1.0",
+    "ts-node": "^10.9.0",
+    "nodemon": "^3.0.0",
+    "jest": "^29.6.0",
+    "ts-jest": "^29.1.0",
+    "supertest": "^6.3.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.0",
+    "@types/node-cron": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,js}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run test"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/biometric-hub"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/biometric-hub/issues"
+  },
+  "homepage": "https://github.com/your-org/biometric-hub#readme"
+}

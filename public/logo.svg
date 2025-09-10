@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="globeGradient" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#4682B4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E90FF;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="handsGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#A0522D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="infinityGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FF8C00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Globe background -->
+  <circle cx="100" cy="80" r="70" fill="url(#globeGradient)" stroke="#1E90FF" stroke-width="2"/>
+  
+  <!-- Grid lines on globe -->
+  <g stroke="#FFFFFF" stroke-width="1" fill="none" opacity="0.3">
+    <!-- Longitude lines -->
+    <path d="M 50 80 Q 100 50 150 80 Q 100 110 50 80"/>
+    <path d="M 60 80 Q 100 60 140 80 Q 100 100 60 80"/>
+    <path d="M 70 80 Q 100 70 130 80 Q 100 90 70 80"/>
+    <!-- Latitude lines -->
+    <ellipse cx="100" cy="80" rx="70" ry="20"/>
+    <ellipse cx="100" cy="80" rx="60" ry="35"/>
+    <ellipse cx="100" cy="80" rx="45" ry="50"/>
+  </g>
+  
+  <!-- Continents outline -->
+  <g fill="#FFFFFF" opacity="0.6">
+    <!-- Simplified continent shapes -->
+    <path d="M 80 60 Q 90 65 95 70 Q 85 75 80 70 Z"/>
+    <path d="M 110 55 Q 120 60 125 65 Q 115 70 110 65 Z"/>
+    <path d="M 75 85 Q 85 90 90 95 Q 80 100 75 95 Z"/>
+    <path d="M 120 85 Q 130 90 135 95 Q 125 100 120 95 Z"/>
+  </g>
+  
+  <!-- Doves -->
+  <g fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1">
+    <!-- Dove 1 -->
+    <path d="M 60 40 Q 65 35 70 40 Q 75 35 80 40 Q 75 45 70 40 Q 65 45 60 40"/>
+    <circle cx="68" cy="38" r="1" fill="#333"/>
+    <path d="M 70 40 Q 80 38 85 45" stroke-width="1.5" fill="none"/>
+    
+    <!-- Dove 2 -->
+    <path d="M 120 35 Q 125 30 130 35 Q 135 30 140 35 Q 135 40 130 35 Q 125 40 120 35"/>
+    <circle cx="128" cy="33" r="1" fill="#333"/>
+    <path d="M 130 35 Q 140 33 145 40" stroke-width="1.5" fill="none"/>
+    
+    <!-- Dove 3 -->
+    <path d="M 90 25 Q 95 20 100 25 Q 105 20 110 25 Q 105 30 100 25 Q 95 30 90 25"/>
+    <circle cx="98" cy="23" r="1" fill="#333"/>
+    <path d="M 100 25 Q 110 23 115 30" stroke-width="1.5" fill="none"/>
+  </g>
+  
+  <!-- Caring hands -->
+  <g fill="url(#handsGradient)">
+    <!-- Left hand -->
+    <path d="M 20 120 Q 30 110 40 115 Q 50 120 55 130 Q 60 140 50 150 Q 40 160 30 155 Q 20 150 15 140 Q 10 130 20 120"/>
+    
+    <!-- Right hand -->
+    <path d="M 180 120 Q 170 110 160 115 Q 150 120 145 130 Q 140 140 150 150 Q 160 160 170 155 Q 180 150 185 140 Q 190 130 180 120"/>
+  </g>
+  
+  <!-- Infinity symbol -->
+  <g fill="url(#infinityGradient)" transform="translate(100, 165)">
+    <path d="M -25 0 Q -25 -10 -12.5 -10 Q 0 -10 0 0 Q 0 10 12.5 10 Q 25 10 25 0 Q 25 -10 12.5 -10 Q 0 -10 0 0 Q 0 10 -12.5 10 Q -25 10 -25 0" stroke="#B8860B" stroke-width="2"/>
+  </g>
+  
+  <!-- Sparkles/stars -->
+  <g fill="#FFFFFF" opacity="0.8">
+    <circle cx="40" cy="60" r="2"/>
+    <circle cx="160" cy="50" r="2"/>
+    <circle cx="180" cy="90" r="1.5"/>
+    <circle cx="20" cy="100" r="1.5"/>
+    <circle cx="50" cy="180" r="1"/>
+    <circle cx="150" cy="180" r="1"/>
+  </g>
+</svg>

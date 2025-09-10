@@ -1,0 +1,22 @@
+🚀 Multi-Device Biometric Server running on http://localhost:5173
+📱 Support for multiple devices across different networks
+🌐 Branch-based device management enabled
+Loaded 4 API keys from storage
+💾 Database initialized: /home/yna/Biomiddleware/data/biometric.db
+📋 EmployeeService initialized with database backend
+🏢 BranchService initialized
+Loaded 4 API keys from storage
+🔑 Loaded 4 API keys (4 active)
+📁 Loaded 5 device configuration(s)
+⚠️ Could not reconnect to branch-main: Failed to connect to device branch-main: Network error: connect ECONNREFUSED 127.0.0.1:4001
+⚠️ Could not reconnect to branch-warehouse: Failed to connect to device branch-warehouse: Network error: connect ECONNREFUSED 127.0.0.1:4002
+⚠️ Could not reconnect to branch-security: Failed to connect to device branch-security: Network error: connect ECONNREFUSED 127.0.0.1:4003
+⚠️ Could not reconnect to reception-desk: Failed to connect to device reception-desk: Network error: connect ECONNREFUSED 127.0.0.1:4004
+🔌 DeviceManager initialized with 5 device(s)
+🔄 Device Sync Service initialized
+⏰ Auto-sync monitoring started
+✅ Server initialization complete with database persistence
+🏢 Updated branch: test
+🗑️ Deleted branch: test
+🗑️ Removed device: test-device-newbranch
+🗑️ Deleted branch: newbr

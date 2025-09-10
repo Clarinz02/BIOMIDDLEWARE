@@ -1,0 +1,238 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for server.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="prettify.css" />
+    <link rel="stylesheet" href="base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="index.html">All files</a> server.ts</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>0/11</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/4</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>0/11</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line low'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">#!/usr/bin/env node
+/**
+ * Enhanced Multi-Device Biometric Server with TypeScript
+ * 
+ * Features:
+ * - Multi-device management with real-time status updates
+ * - Role-based access control (RBAC) with JWT authentication
+ * - WebSocket real-time communication
+ * - Device grouping, templates, and bulk operations
+ * - Comprehensive audit logging and security
+ * - Advanced monitoring and health checks
+ */
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import express, { Request, Response, NextFunction } from 'express';</span>
+<span class="cstat-no" title="statement not covered" >import { createServer } from 'http';</span>
+import cors from 'cors';
+import helmet from 'helmet';
+import compression from 'compression';
+import morgan from 'morgan';
+import path from 'path';
+&nbsp;
+// Services and Middleware
+<span class="cstat-no" title="statement not covered" >import { EnhancedDeviceManager } from './services/DeviceManagerService';</span>
+import { WebSocketService } from './services/WebSocketService';
+<span class="cstat-no" title="statement not covered" >import { </span>
+  securityMiddleware, 
+  JWTService, 
+  PasswordService, 
+  AuditLoggerService,
+  errorHandler 
+} from './middleware/security';
+&nbsp;
+// Types
+import { ApiResponse, AuthUser, SystemRole, DeviceConfig } from './types';
+&nbsp;
+// Initialize Express app
+const app = <span class="cstat-no" title="statement not covered" >express();</span>
+const httpServer = <span class="cstat-no" title="statement not covered" >createServer(app);</span>
+const PORT = <span class="cstat-no" title="statement not covered" >process.env.PORT || 3000;</span>
+&nbsp;
+// Initialize services
+const deviceManager = <span class="cstat-no" title="statement not covered" >new EnhancedDeviceManager('./data');</span>
+const jwtService = <span class="cstat-no" title="statement not covered" >new JWTService(process.env.JWT_SECRET || 'your-secret-key');</span>
+const passwordService = <span class="cstat-no" title="statement not covered" >new PasswordService();</span>
+const auditLogger = <span class="cstat-no" title="statement not covered" >AuditLoggerService.getInstance();</span>
+&nbsp;
+let webSocketService: WebSocketService;
+&nbsp;
+// ===========================================\n// MIDDLEWARE SETUP\n// ===========================================
+&nbsp;
+// Security middleware\napp.use(securityMiddleware.helmet);\napp.use(securityMiddleware.requestId);\napp.use(securityMiddleware.rateLimiter);\n\n// Basic middleware\napp.use(compression());\napp.use(morgan(':remote-addr - :remote-user [:date[clf]] \":method :url HTTP/:http-version\" :status :res[content-length] \":referrer\" \":user-agent\" :response-time ms'));\napp.use(cors({\n  origin: process.env.CORS_ORIGINS?.split(',') || ['http://localhost:3000'],\n  credentials: true,\n  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],\n  allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key', 'X-Device-ID'],\n}));\n\napp.use(express.json({ limit: '10mb' }));\napp.use(express.urlencoded({ extended: true, limit: '10mb' }));\napp.use(express.static(path.join(__dirname, '../public')));\n\n// ===========================================\n// UTILITY FUNCTIONS\n// ===========================================\n\nconst sendResponse = &lt;T&gt;(\n  res: Response,\n  success: boolean,\n  data?: T,\n  message?: string,\n  statusCode = 200\n): void =&gt; {\n  const response: ApiResponse&lt;T&gt; = {\n    success,\n    data,\n    message,\n    meta: {\n      timestamp: new Date().toISOString(),\n      version: '2.0.0',\n      requestId: (res.req as any).requestId,\n    },\n  };\n\n  res.status(statusCode).json(response);\n};\n\nconst asyncHandler = (fn: Function) =&gt; {\n  return (req: Request, res: Response, next: NextFunction) =&gt; {\n    Promise.resolve(fn(req, res, next)).catch(next);\n  };\n};\n\n// ===========================================\n// AUTHENTICATION ROUTES\n// ===========================================\n\n// Mock user store (in production, use database)\nconst users = new Map&lt;string, {\n  id: string;\n  username: string;\n  email: string;\n  passwordHash: string;\n  role: SystemRole;\n  active: boolean;\n}&gt;(\n  [\n    {\n      id: 'admin-1',\n      username: 'admin',\n      email: 'admin@example.com',\n      passwordHash: '', // Will be set below\n      role: 'super_admin',\n      active: true,\n    },\n  ].map(user =&gt; [user.username, user])\n);\n\n// Initialize admin password\npasswordService.hashPassword('admin123').then(hash =&gt; {\n  const admin = users.get('admin');\n  if (admin) {\n    admin.passwordHash = hash;\n  }\n});\n\napp.post(\n  '/api/auth/login',\n  securityMiddleware.authRateLimiter,\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const { username, password } = req.body;\n\n    if (!username || !password) {\n      return sendResponse(res, false, null, 'Username and password required', 400);\n    }\n\n    const user = users.get(username);\n    if (!user || !user.active) {\n      return sendResponse(res, false, null, 'Invalid credentials', 401);\n    }\n\n    const validPassword = await passwordService.verifyPassword(password, user.passwordHash);\n    if (!validPassword) {\n      return sendResponse(res, false, null, 'Invalid credentials', 401);\n    }\n\n    const authUser: AuthUser = {\n      id: user.id,\n      username: user.username,\n      email: user.email,\n      role: user.role,\n      permissions: [], // Would be populated from database\n      active: user.active,\n      createdAt: new Date().toISOString(),\n    };\n\n    const token = jwtService.generateToken(authUser);\n\n    await auditLogger.logAction({\n      userId: user.id,\n      action: 'login',\n      resource: 'auth',\n      details: { username },\n      ipAddress: req.ip || 'unknown',\n      userAgent: req.get('User-Agent') || 'unknown',\n      success: true,\n    });\n\n    sendResponse(res, true, { user: authUser, token }, 'Login successful');\n  })\n);\n\napp.post(\n  '/api/auth/refresh',\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const { token } = req.body;\n    \n    if (!token) {\n      return sendResponse(res, false, null, 'Token required', 400);\n    }\n\n    try {\n      const newToken = jwtService.refreshToken(token);\n      sendResponse(res, true, { token: newToken }, 'Token refreshed');\n    } catch (error) {\n      sendResponse(res, false, null, 'Invalid token', 401);\n    }\n  })\n);\n\n// ===========================================\n// DEVICE MANAGEMENT ROUTES\n// ===========================================\n\n// System overview\napp.get(\n  '/api/devices',\n  securityMiddleware.authenticate(jwtService),\n  securityMiddleware.authorize('devices', 'read'),\n  securityMiddleware.auditLogger('read', 'devices'),\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const overview = deviceManager.getSystemOverview();\n    sendResponse(res, true, overview);\n  })\n);\n\n// Add new device\napp.post(\n  '/api/devices',\n  securityMiddleware.authenticate(jwtService),\n  securityMiddleware.authorize('devices', 'create'),\n  securityMiddleware.auditLogger('create', 'devices'),\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const { deviceId, name, ip, apiKey, useHttps, wifiNetwork, branch, location, autoReconnect, deviceType, capabilities } = req.body;\n    \n    if (!deviceId || !ip) {\n      return sendResponse(res, false, null, 'deviceId and ip are required', 400);\n    }\n    \n    const config = await deviceManager.addDevice(deviceId, {\n      name,\n      ip,\n      apiKey,\n      useHttps: useHttps || false,\n      wifiNetwork,\n      branch: branch || 'main',\n      location,\n      autoReconnect: autoReconnect !== false,\n      deviceType,\n      capabilities,\n    });\n    \n    // Broadcast device addition via WebSocket\n    webSocketService.broadcastSystemAlert({\n      level: 'info',\n      title: 'Device Added',\n      message: `New device ${name} has been added`,\n      deviceId,\n      branch: config.branch,\n    });\n    \n    sendResponse(res, true, config, 'Device added successfully', 201);\n  })\n);\n\n// Connect to device\napp.post(\n  '/api/devices/:deviceId/connect',\n  securityMiddleware.authenticate(jwtService),\n  securityMiddleware.authorize('devices', 'execute'),\n  securityMiddleware.auditLogger('connect', 'devices'),\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const { deviceId } = req.params;\n    \n    await deviceManager.connectDevice(deviceId);\n    const status = deviceManager.getDeviceStatus(deviceId);\n    \n    // Broadcast status change via WebSocket\n    webSocketService.broadcastDeviceStatus(deviceId, status);\n    \n    sendResponse(res, true, status, `Connected to device: ${deviceId}`);\n  })\n);\n\n// Disconnect from device\napp.post(\n  '/api/devices/:deviceId/disconnect',\n  securityMiddleware.authenticate(jwtService),\n  securityMiddleware.authorize('devices', 'execute'),\n  securityMiddleware.auditLogger('disconnect', 'devices'),\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const { deviceId } = req.params;\n    \n    await deviceManager.disconnectDevice(deviceId);\n    const status = deviceManager.getDeviceStatus(deviceId);\n    \n    // Broadcast status change via WebSocket\n    webSocketService.broadcastDeviceStatus(deviceId, status);\n    \n    sendResponse(res, true, status, `Disconnected from device: ${deviceId}`);\n  })\n);\n\n// Get specific device status\napp.get(\n  '/api/devices/:deviceId',\n  securityMiddleware.authenticate(jwtService),\n  securityMiddleware.authorize('devices', 'read'),\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const { deviceId } = req.params;\n    const status = deviceManager.getDeviceStatus(deviceId);\n    \n    if (!status) {\n      return sendResponse(res, false, null, 'Device not found', 404);\n    }\n    \n    sendResponse(res, true, status);\n  })\n);\n\n// Update device configuration\napp.put(\n  '/api/devices/:deviceId',\n  securityMiddleware.authenticate(jwtService),\n  securityMiddleware.authorize('devices', 'update'),\n  securityMiddleware.auditLogger('update', 'devices'),\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const { deviceId } = req.params;\n    const updates = req.body;\n    \n    const updatedConfig = await deviceManager.updateDeviceConfig(deviceId, updates);\n    \n    sendResponse(res, true, updatedConfig, 'Device configuration updated');\n  })\n);\n\n// Delete device\napp.delete(\n  '/api/devices/:deviceId',\n  securityMiddleware.authenticate(jwtService),\n  securityMiddleware.authorize('devices', 'delete'),\n  securityMiddleware.auditLogger('delete', 'devices'),\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const { deviceId } = req.params;\n    \n    await deviceManager.removeDevice(deviceId);\n    \n    sendResponse(res, true, null, `Device removed: ${deviceId}`);\n  })\n);\n\n// Test device connection\napp.get(\n  '/api/devices/:deviceId/test',\n  securityMiddleware.authenticate(jwtService),\n  securityMiddleware.authorize('devices', 'read'),\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const { deviceId } = req.params;\n    \n    const result = await deviceManager.testConnection(deviceId);\n    \n    sendResponse(res, true, result);\n  })\n);\n\n// ===========================================\n// DEVICE OPERATIONS (Multi-Device)\n// ===========================================\n\n// Device information\napp.get(\n  '/api/devices/:deviceId/version',\n  securityMiddleware.authenticate(jwtService),\n  securityMiddleware.authorize('devices', 'read'),\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const { deviceId } = req.params;\n    const device = deviceManager.getDevice(deviceId);\n    const info = await device.getVersionInfo();\n    sendResponse(res, true, info);\n  })\n);\n\napp.get(\n  '/api/devices/:deviceId/capabilities',\n  securityMiddleware.authenticate(jwtService),\n  securityMiddleware.authorize('devices', 'read'),\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const { deviceId } = req.params;\n    const device = deviceManager.getDevice(deviceId);\n    const capabilities = await device.getDeviceCapabilities();\n    sendResponse(res, true, capabilities);\n  })\n);\n\n// User management per device\napp.get(\n  '/api/devices/:deviceId/users',\n  securityMiddleware.authenticate(jwtService),\n  securityMiddleware.authorize('users', 'read'),\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const { deviceId } = req.params;\n    const { position, count } = req.query;\n    \n    const device = deviceManager.getDevice(deviceId);\n    const users = await device.getUsers(\n      position ? parseInt(position as string) : 0,\n      count ? parseInt(count as string) : 100\n    );\n    \n    sendResponse(res, true, users);\n  })\n);\n\n// Attendance records per device\napp.get(\n  '/api/devices/:deviceId/attendance',\n  securityMiddleware.authenticate(jwtService),\n  securityMiddleware.authorize('attendance', 'read'),\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const { deviceId } = req.params;\n    const { startDate, endDate, position, count } = req.query;\n    \n    const device = deviceManager.getDevice(deviceId);\n    const logs = await device.getAttendanceLogs(\n      startDate as string,\n      endDate as string,\n      position ? parseInt(position as string) : 0,\n      count ? parseInt(count as string) : 100\n    );\n    \n    sendResponse(res, true, logs);\n  })\n);\n\n// ===========================================\n// BULK OPERATIONS\n// ===========================================\n\napp.post(\n  '/api/devices/bulk/connect',\n  securityMiddleware.authenticate(jwtService),\n  securityMiddleware.authorize('devices', 'execute'),\n  securityMiddleware.auditLogger('bulk_connect', 'devices'),\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const { deviceIds, name = 'Bulk Connect Operation' } = req.body;\n    \n    if (!deviceIds || !Array.isArray(deviceIds)) {\n      return sendResponse(res, false, null, 'deviceIds array is required', 400);\n    }\n    \n    const operationId = await deviceManager.createBulkOperation(\n      name,\n      'connect',\n      deviceIds\n    );\n    \n    sendResponse(res, true, { operationId }, 'Bulk operation started');\n  })\n);\n\napp.get(\n  '/api/devices/bulk/:operationId',\n  securityMiddleware.authenticate(jwtService),\n  securityMiddleware.authorize('devices', 'read'),\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const { operationId } = req.params;\n    \n    const operation = deviceManager.getBulkOperation(operationId);\n    \n    if (!operation) {\n      return sendResponse(res, false, null, 'Operation not found', 404);\n    }\n    \n    sendResponse(res, true, operation);\n  })\n);\n\n// ===========================================\n// LEGACY COMPATIBILITY ROUTES\n// ===========================================\n\n// Legacy device connection for backward compatibility\napp.post(\n  '/api/device/connect',\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const { ip, apiKey, useHttps, deviceId } = req.body;\n    const finalDeviceId = deviceId || 'default';\n    \n    try {\n      await deviceManager.addDevice(finalDeviceId, {\n        name: 'Default Device',\n        ip,\n        apiKey,\n        useHttps: useHttps || false,\n      });\n      \n      await deviceManager.connectDevice(finalDeviceId);\n      const status = deviceManager.getDeviceStatus(finalDeviceId);\n      \n      sendResponse(res, true, status, 'Device connection configured');\n    } catch (error) {\n      sendResponse(res, false, null, error.message, 400);\n    }\n  })\n);\n\napp.get(\n  '/api/device/config',\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const overview = deviceManager.getSystemOverview();\n    const defaultDevice = overview.devices.find(d =&gt; d.deviceId === 'default') || overview.devices[0];\n    \n    if (defaultDevice) {\n      sendResponse(res, true, {\n        config: {\n          ip: defaultDevice.ip,\n          apiKey: 'configured',\n          useHttps: false,\n        },\n        connected: defaultDevice.connected,\n      });\n    } else {\n      sendResponse(res, true, {\n        config: {\n          ip: '192.168.1.100',\n          apiKey: null,\n          useHttps: false,\n        },\n        connected: false,\n      });\n    }\n  })\n);\n\n// ===========================================\n// WEBSOCKET STATUS ENDPOINT\n// ===========================================\n\napp.get(\n  '/api/websocket/status',\n  securityMiddleware.authenticate(jwtService),\n  securityMiddleware.requireRole('admin'),\n  asyncHandler(async (req: Request, res: Response) =&gt; {\n    const clients = webSocketService.getConnectedClients();\n    const clientCount = webSocketService.getClientCount();\n    \n    sendResponse(res, true, {\n      clientCount,\n      clients,\n    });\n  })\n);\n\n// ===========================================\n// HEALTH CHECK ENDPOINTS\n// ===========================================\n\napp.get('/health', (req: Request, res: Response) =&gt; {\n  sendResponse(res, true, {\n    status: 'healthy',\n    uptime: process.uptime(),\n    memory: process.memoryUsage(),\n    version: '2.0.0',\n  });\n});\n\napp.get('/ready', (req: Request, res: Response) =&gt; {\n  const ready = deviceManager &amp;&amp; webSocketService;\n  \n  if (ready) {\n    sendResponse(res, true, { status: 'ready' });\n  } else {\n    sendResponse(res, false, { status: 'not ready' }, 'Service not ready', 503);\n  }\n});\n\n// ===========================================\n// STATIC FILES AND SPA SUPPORT\n// ===========================================\n\n// Serve main page\napp.get('/', (req: Request, res: Response) =&gt; {\n  res.sendFile(path.join(__dirname, '../public', 'index.html'));\n});\n\n// SPA fallback - serve index.html for all non-API routes\napp.get('*', (req: Request, res: Response) =&gt; {\n  if (req.path.startsWith('/api/')) {\n    sendResponse(res, false, null, 'API endpoint not found', 404);\n  } else {\n    res.sendFile(path.join(__dirname, '../public', 'index.html'));\n  }\n});\n\n// ===========================================\n// ERROR HANDLING\n// ===========================================\n\napp.use(errorHandler);\n\n// ===========================================\n// SERVER INITIALIZATION\n// ===========================================\n\nasync function initializeServer(): Promise&lt;void&gt; {\n  try {\n    console.log('🚀 Initializing Enhanced Biometric Server...');\n    \n    // Initialize device manager\n    await deviceManager.init();\n    \n    // Initialize WebSocket service\n    webSocketService = new WebSocketService(httpServer, jwtService);\n    \n    // Connect device manager events to WebSocket broadcasts\n    deviceManager.on('device:status_changed', ({ deviceId, status, config }) =&gt; {\n      webSocketService.broadcastDeviceStatus(deviceId, { ...status, config });\n    });\n    \n    deviceManager.on('device:health_updated', ({ deviceId, health }) =&gt; {\n      webSocketService.broadcastDeviceHealth(deviceId, health);\n    });\n    \n    deviceManager.on('bulk_operation:progress', ({ operationId, progress, operation }) =&gt; {\n      webSocketService.broadcastBulkOperationProgress(operation);\n    });\n    \n    deviceManager.on('device:connected', ({ deviceId, config }) =&gt; {\n      webSocketService.broadcastSystemAlert({\n        level: 'info',\n        title: 'Device Connected',\n        message: `Device ${config.name} is now online`,\n        deviceId,\n        branch: config.branch,\n      });\n    });\n    \n    deviceManager.on('device:connection_failed', ({ deviceId, error }) =&gt; {\n      webSocketService.broadcastSystemAlert({\n        level: 'error',\n        title: 'Device Connection Failed',\n        message: `Failed to connect to device ${deviceId}: ${error}`,\n        deviceId,\n      });\n    });\n    \n    console.log('✅ Server initialization complete');\n    \n  } catch (error) {\n    console.error('❌ Server initialization failed:', error);\n    process.exit(1);\n  }\n}\n\n// ===========================================\n// GRACEFUL SHUTDOWN\n// ===========================================\n\nprocess.on('SIGTERM', gracefulShutdown);\nprocess.on('SIGINT', gracefulShutdown);\n\nasync function gracefulShutdown(signal: string): Promise&lt;void&gt; {\n  console.log(`\\n🛑 Received ${signal}. Starting graceful shutdown...`);\n  \n  try {\n    // Stop accepting new connections\n    httpServer.close(async () =&gt; {\n      console.log('📡 HTTP server closed');\n      \n      // Shutdown services\n      if (webSocketService) {\n        await webSocketService.shutdown();\n      }\n      \n      if (deviceManager) {\n        await deviceManager.shutdown();\n      }\n      \n      console.log('✅ Graceful shutdown complete');\n      process.exit(0);\n    });\n    \n    // Force shutdown after 30 seconds\n    setTimeout(() =&gt; {\n      console.error('⚠️ Forced shutdown due to timeout');\n      process.exit(1);\n    }, 30000);\n    \n  } catch (error) {\n    console.error('❌ Error during shutdown:', error);\n    process.exit(1);\n  }\n}\n\n// ===========================================\n// START SERVER\n// ===========================================\n\nhttpServer.listen(PORT, async () =&gt; {\n  console.log(`🚀 Enhanced Multi-Device Biometric Server running on http://localhost:${PORT}`);\n  console.log(`📱 Features: Multi-device, WebSocket, RBAC, Audit logging, Health monitoring`);\n  console.log(`🌐 Branch-based device management enabled`);\n  \n  await initializeServer();\n});\n\nexport default app;
+&nbsp;</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2025-09-06T08:16:12.277Z
+            </div>
+        <script src="prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="sorter.js"></script>
+        <script src="block-navigation.js"></script>
+    </body>
+</html>
+    
